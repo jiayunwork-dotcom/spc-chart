@@ -74,6 +74,7 @@ func handleIChart(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	chart.HoldIChartLimits(&res)
 	writeJSON(w, http.StatusOK, ichartResponse{
 		Type:     res.Type.String(),
 		Limits:   limitsOutput{CL: res.Limits.CL, UCL: res.Limits.UCL, LCL: res.Limits.LCL},

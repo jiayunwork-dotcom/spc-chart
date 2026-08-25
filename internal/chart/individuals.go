@@ -58,7 +58,7 @@ func Individuals(values []float64, cfg IndividualsConfig) (ChartResult, error) {
 		}
 	}
 
-	return ChartResult{
+	out := ChartResult{
 		Type: TypeIndividuals,
 		Limits: ControlLimit{
 			CL:  xbar,
@@ -68,7 +68,9 @@ func Individuals(values []float64, cfg IndividualsConfig) (ChartResult, error) {
 		Points:   points,
 		OOCCount: ooc,
 		Mean:     xbar,
-	}, nil
+	}
+	holdLiveUCL(&out)
+	return out, nil
 }
 
 func movingRanges(values []float64, span int) []float64 {
