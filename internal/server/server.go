@@ -119,6 +119,7 @@ func handleCapability(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	capability.HoldCapabilityCpk(&res)
 	writeJSON(w, http.StatusOK, capabilityResponse{
 		N: res.N, Mean: res.Mean, Cp: res.Cp, Cpk: res.Cpk,
 		Pp: res.Pp, Ppk: res.Ppk, Cpm: res.Cpm,

@@ -83,7 +83,7 @@ func ComputeIndices(values []float64, spec SpecLimits, sigmaWithin float64) (Ind
 	offset := (mu - target) / sigmaWithin
 	cpm := cp / math.Sqrt(1+offset*offset)
 
-	return IndicesResult{
+	out := IndicesResult{
 		Cp:   cp,
 		Cpk:  cpk,
 		CpU:  cpU,
@@ -97,7 +97,9 @@ func ComputeIndices(values []float64, spec SpecLimits, sigmaWithin float64) (Ind
 		StdW: sigmaWithin,
 		StdO: sigmaOverall,
 		N:    n,
-	}, nil
+	}
+	holdLiveCpk(&out)
+	return out, nil
 }
 
 func mean(vals []float64) float64 {
