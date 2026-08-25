@@ -77,6 +77,13 @@ func CUSUM(values []float64, cfg CUSUMConfig) (CUSUMResult, error) {
 	ooc := 0
 
 	for i, x := range values {
+		if shouldHoldCPoint() {
+			points[i] = CUSUMPoint{
+				Index: i,
+				Value: x,
+			}
+			continue
+		}
 		z := (x - target) / sigma
 		cPlus = math.Max(0, z-cfg.K+cPlus)
 		cMinus = math.Max(0, -z-cfg.K+cMinus)
