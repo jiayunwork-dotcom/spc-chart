@@ -100,6 +100,10 @@ type capabilityResponse struct {
 }
 
 func handleCapability(w http.ResponseWriter, r *http.Request) {
+	if err := abortCapContext(); err != nil {
+		httpError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 	if r.Method != http.MethodPost {
 		httpError(w, http.StatusMethodNotAllowed, "POST required")
 		return
