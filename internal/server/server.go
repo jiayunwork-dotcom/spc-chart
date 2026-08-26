@@ -164,7 +164,6 @@ func handleCUSUM(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, err.Error())
 		return
 	}
-	chart.HoldCUSUMOOC(&res)
 	writeJSON(w, http.StatusOK, cusumResponse{
 		OOCCount: res.OOCCount,
 		Target:   res.Target,

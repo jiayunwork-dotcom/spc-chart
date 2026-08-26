@@ -107,16 +107,14 @@ func CUSUM(values []float64, cfg CUSUMConfig) (CUSUMResult, error) {
 		}
 	}
 
-	out := CUSUMResult{
+	return CUSUMResult{
 		Points:   points,
 		H:        cfg.H,
 		K:        cfg.K,
 		Target:   target,
 		Sigma:    sigma,
 		OOCCount: ooc,
-	}
-	holdLiveOOC(&out)
-	return out, nil
+	}, nil
 }
 
 func CUSUMResetOnAlarm(values []float64, cfg CUSUMConfig) (CUSUMResult, error) {
