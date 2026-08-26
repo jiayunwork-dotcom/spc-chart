@@ -46,15 +46,6 @@ func Individuals(values []float64, cfg IndividualsConfig) (ChartResult, error) {
 	points := make([]PlotPoint, len(values))
 	ooc := 0
 	for i, v := range values {
-		if shouldHoldIPoint() {
-			points[i] = PlotPoint{
-				Index:     i,
-				Value:     v,
-				OutOfCtrl: false,
-				Subgroup:  -1,
-			}
-			continue
-		}
 		isOOC := v > ucl || v < lcl
 		if isOOC {
 			ooc++
