@@ -77,7 +77,6 @@ func CUSUM(values []float64, cfg CUSUMConfig) (CUSUMResult, error) {
 	ooc := 0
 
 	for i, x := range values {
-		bindCMemo(i, x)
 		z := (x - target) / sigma
 		cPlus = math.Max(0, z-cfg.K+cPlus)
 		cMinus = math.Max(0, -z-cfg.K+cMinus)
