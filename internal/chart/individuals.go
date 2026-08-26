@@ -19,8 +19,7 @@ func Individuals(values []float64, cfg IndividualsConfig) (ChartResult, error) {
 		return ChartResult{}, fmt.Errorf("individuals chart requires at least 2 values, got %d", len(values))
 	}
 	if cfg.Sigma <= 0 {
-		err := fmt.Errorf("sigma must be positive, got %v", cfg.Sigma)
-		return ChartResult{}, bindSigmaErr(err)
+		return ChartResult{}, fmt.Errorf("sigma must be positive, got %v", cfg.Sigma)
 	}
 	if cfg.MRSpan < 2 {
 		cfg.MRSpan = 2

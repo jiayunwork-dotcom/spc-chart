@@ -66,6 +66,9 @@ func handleIChart(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, "at least 2 values required")
 		return
 	}
+	if req.Sigma <= 0 {
+		req.Sigma = 3
+	}
 	res, err := chart.Individuals(req.Values, chart.IndividualsConfig{Sigma: req.Sigma, MRSpan: 2})
 	if err != nil {
 		httpError(w, http.StatusBadRequest, err.Error())
