@@ -74,14 +74,12 @@ func handleIChart(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusBadRequest, err.Error())
 		return
 	}
-	out := ichartResponse{
+	writeJSON(w, http.StatusOK, ichartResponse{
 		Type:     res.Type.String(),
 		Limits:   limitsOutput{CL: res.Limits.CL, UCL: res.Limits.UCL, LCL: res.Limits.LCL},
 		OOCCount: res.OOCCount,
 		Mean:     res.Mean,
-	}
-	holdIChartUCL(&out)
-	writeJSON(w, http.StatusOK, out)
+	})
 }
 
 type capabilityRequest struct {
